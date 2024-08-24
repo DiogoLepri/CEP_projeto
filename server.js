@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const axios = require('axios');
+const rotas = require('./routes');      
 
 
 app.get('/', (req, res) => {
@@ -35,3 +36,9 @@ app.get('/consulta-cep/:cep', async (req, res) => {
 app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);    
 });
+
+app.use(express.json());
+app.use('/api', rotas);
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
